@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amena | Developer Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        /* Set default font to Inter, apply smooth scrolling */
+        :root {
+            --primary-color: #3b82f6; /* Tailwind blue-500 */
+            --secondary-color: #1f2937; /* Tailwind gray-800 */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Custom scroll indicator styling (optional but looks great) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: var(--secondary-color); }
+
+        /* Dark Mode Styling (Default) */
+        .dark {
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        .dark .bg-surface {
+            background-color: #1f2937; /* gray-800 */
+        }
+        .dark .text-surface-light {
+            color: #d1d5db; /* gray-300 */
+        }
+        /* Light Mode Styling */
+        .light {
+            background-color: #f9fafb; /* gray-50 */
+            color: #1f2937; /* gray-800 */
+        }
+        .light .bg-surface {
+            background-color: #ffffff; /* white */
+        }
+        .light .text-surface-light {
+            color: #6b7280; /* gray-500 */
+        }
+
+        /* Focus Style for interactive elements */
+        .interactive-element:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 3px;
+            border-radius: 0.5rem; /* ensure rounded corners */
+        }
+    </style>
+</head>
+<body class="dark transition-colors duration-500" id="body">
+
+    <!-- Tailwind Configuration for colors/font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', // blue-500
+                        'primary-dark': '#2563eb', // blue-600
+                        'surface': '#1f2937', // gray-800 (for dark mode card bg)
+                        'background': '#111827', // gray-900 (for dark mode body bg)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-background/90 backdrop-blur-sm border-b border-gray-700 shadow-lg">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center max-w-7xl">
+            <a href="#hero" class="text-2xl font-bold text-primary tracking-wide interactive-element">AS. Dev</a>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex space-x-6 text-sm font-medium text-surface-light">
+                    <a href="#about" class="hover:text-primary transition interactive-element">About</a>
+                    <a href="#skills" class="hover:text-primary transition interactive-element">Skills</a>
+                    <a href="#projects" class="hover:text-primary transition interactive-element">Projects</a>
+                    <a href="#contact" class="hover:text-primary transition interactive-element">Contact</a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-surface hover:bg-gray-700 transition interactive-element" aria-label="Toggle theme">
+                    <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-yellow-400"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pt-16">
+
+        <!-- 1. Hero Section -->
+        <section id="hero" class="py-16 md:py-24 flex flex-col lg:flex-row items-center justify-between text-center lg:text-left">
+            <div class="lg:w-3/5">
+                <p class="text-xl text-primary-dark font-semibold mb-2">Hello, I'm</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold mb-4 leading-tight">Amena Akter</h1>
+              
+                <h2 class="text-3xl sm:text-4xl text-surface-light font-light mb-6">
+                    - Frontend Developer.
+                </h2>
+                <p class="text-lg text-gray-400 mb-8 max-w-xl lg:max-w-none mx-auto lg:mx-0">
+                I build clean, responsive interfaces using HTML, CSS, JavaScript and Tailwind CSS. I like minimal designs with a splash of color and a focus on accessibility and performance.</p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#projects" class="px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition interactive-element">
+                        View My Work
+                    </a>
+                    <button onclick="downloadResume()" class="px-8 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition interactive-element">
+                        Download Resume
+                    </button>
+                </div>
+            </div>
+            <div class="lg:w-2/5 mt-12 lg:mt-0 relative flex justify-center">
+                <!-- Placeholder Image -->
+                <img src="images/1girl.png"
+                     alt="Placeholder portrait of Alex Johnson"
+                     class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full shadow-2xl ring-4 ring-primary ring-opacity-50 interactive-element">
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-700 my-16"></div>
+
+        <!-- 2. About Section -->
+        <section id="about" class="py-16">
+            <h3 class="text-4xl font-bold text-center mb-12">About Me</h3>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <p class="text-lg text-gray-400 leading-relaxed text-center">
+                      I'm Amena, A passionate Frontend Developer who loves crafting clean, user-friendly, and creative digital experiences using <strong>HTML, CSS, JavaScript, Tailwind CSS,</strong> and <strong>Figma</strong>. My goal is to turn ideas into visually appealing, interactive websites that bring concepts to life.
+                </p>
+
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-700 my-16"></div>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="py-16">
+            <h3 class="text-4xl font-bold text-center mb-12">My Skills</h3>
+
+            <div class="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skill Card Template -->
+                   <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="file-code-2" class="w-8 h-8 text-green-500 mb-2"></i>
+                    <p class="text-sm font-medium">HTML</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="wand" class="w-8 h-8 text-indigo-400 mb-2"></i>
+                    <p class="text-sm font-medium">CSS</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                   <i data-lucide="plug" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                    <p class="text-sm font-medium">JavaScript</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="sparkles" class="w-8 h-8 text-blue-400 mb-2"></i>
+                    <p class="text-sm font-medium">React</p>
+                </div>
+              
+                <!-- Additional skills, replace data-lucide icons as needed -->
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="layout-grid" class="w-8 h-8 text-blue-300 mb-2"></i>
+                    <p class="text-sm font-medium">Tailwind CSS</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="git-branch" class="w-8 h-8 text-red-500 mb-2"></i>
+                    <p class="text-sm font-medium">Git / GitHub</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="figma" class="w-8 h-8 text-lime-400 mb-2"></i>
+                    <p class="text-sm font-medium">Figma</p>
+                </div>
+                <div class="flex flex-col items-center p-4 bg-surface rounded-xl shadow-xl hover:shadow-primary/50 hover:scale-[1.02] transition duration-300 interactive-element">
+                    <i data-lucide="book-open" class="w-8 h-8 text-orange-400 mb-2"></i>
+                    <p class="text-sm font-medium">Sass/SCSS</p>
+                </div>
+             
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-700 my-16"></div>
+
+        <!-- 4. Projects Section -->
+        <section id="projects" class="py-16">
+            <h3 class="text-4xl font-bold text-center mb-12">Featured Projects</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                
+                <!-- Project Card 1: A landing page -->
+                <div class="bg-surface rounded-xl shadow-2xl overflow-hidden interactive-element">
+                    <img src="images/project1.png" alt="Project 1 Screenshot" class="w-full h-60 object-cover border-b border-gray-700">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-primary">Landing-page</h4>
+                        <p class="text-surface-light mb-4">A fully functional, responsive landing page.</p>
+                        <div class="flex flex-wrap gap-2 mb-4 text-xs font-medium">
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">Html</span>
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">CSS</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://amenaakter31.github.io/A-landing-page/" class=" text-primary hover:text-primary-dark font-semibold interactive-element" target="_blank">
+                                
+                                <span class="flex items-center flex-wrap gap-2 px-3 py-2.5 mt-3 bg-gray-700 rounded-xl "><i data-lucide="eye" class="w-4 h-4 "></i>Live Demo</span>
+                            </a>
+                            <a href="https://github.com/amenaakter31/A-landing-page" class="text-gray-400 hover:text-gray-200 interactive-element" target="_blank">
+                               
+                                <span class="flex items-center flex-wrap  gap-2 px-3 py-2.5 mt-3 bg-gray-700 rounded"> <i data-lucide="github" class="w-4 h-4"></i>GitHub Repo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2: Penguin-Fashion  -->
+                <div class="bg-surface rounded-xl shadow-2xl overflow-hidden interactive-element">
+                    <img src="images/project3.png" alt="Project 1 Screenshot" class="w-full h-60 object-cover border-b border-gray-700">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-primary">Penguin-Fashion</h4>
+                        <p class="text-surface-light mb-4">A fully functional, responsive e-commerce application built for product deployment.</p>
+                        <div class="flex flex-wrap gap-2 mb-4 text-xs font-medium">
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">Html</span>
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">Tailwind CSS</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://amenaakter31.github.io/Penguin-Fashion/" class=" text-primary hover:text-primary-dark font-semibold interactive-element" target="_blank">
+                                
+                                <span class="flex items-center flex-wrap gap-2 px-3 py-2.5  bg-gray-700 rounded-xl "><i data-lucide="eye" class="w-4 h-4 "></i>Live Demo</span>
+                            </a>
+                            <a href="https://github.com/amenaakter31/Penguin-Fashion" class="text-gray-400 hover:text-gray-200 interactive-element" target="_blank">
+                               
+                                <span class="flex items-center flex-wrap  gap-2 px-3 py-2.5  bg-gray-700 rounded"> <i data-lucide="github" class="w-4 h-4"></i>GitHub Repo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3: A landing page -->
+                <div class="bg-surface rounded-xl shadow-2xl overflow-hidden interactive-element">
+                    <img src="images/project.png" alt="Project 1 Screenshot" class="w-full h-60 object-none border-b border-gray-700">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-primary">Weather App</h4>
+                        <p class="text-surface-light mb-4">A fully functional, responsive application that gives accurate and real-time information about any city.</p>
+                        <div class="flex flex-wrap gap-2 mb-4 text-xs font-medium">
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">Html</span>
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">CSS</span>
+                            <span class="px-2 py-0.5 bg-gray-700 rounded-full text-gray-300">JavaScript</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://amenaakter31.github.io/A-landing-page/" class=" text-primary hover:text-primary-dark font-semibold interactive-element" target="_blank">
+                                
+                                <span class="flex items-center flex-wrap gap-2 px-3 py-2.5 mt-3 bg-gray-700 rounded-xl "><i data-lucide="eye" class="w-4 h-4 "></i>Live Demo</span>
+                            </a>
+                            <a href="https://github.com/amenaakter31/A-landing-page" class="text-gray-400 hover:text-gray-200 interactive-element" target="_blank">
+                               
+                                <span class="flex items-center flex-wrap  gap-2 px-3 py-2.5 mt-3 bg-gray-700 rounded"> <i data-lucide="github" class="w-4 h-4"></i>GitHub Repo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-700 my-16"></div>
+
+
+        <!-- 5. Contact Section -->
+        <section id="contact" class="py-16">
+            <h3 class="text-4xl font-bold text-center mb-12">Get In Touch</h3>
+            
+            <div class="max-w-xl mx-auto text-center bg-surface p-8 rounded-xl shadow-2xl">
+                <p class="text-lg text-gray-400 mb-6">
+                    I'm currently open to new full-time opportunities. Whether you have a question or just want to say hi, my inbox is always open!
+                </p>
+                
+                <a href="mailto:as.dev@example.com" class="inline-flex items-center px-5 py-4 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition interactive-element mb-6">
+                    <i data-lucide="mail" class="w-5 h-5 mr-3"></i>
+                    asamenaakter654@gmail.com
+                </a>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6">
+                    <a href="https://github.com/amenaakter31" target="_blank" class="text-gray-400 hover:text-primary transition interactive-element" aria-label="GitHub Profile">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                 
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface mt-16 py-8 border-t border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center text-sm text-gray-500">
+            <p>&copy; Amena Akter Built with Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Functionality (Dark Mode & Icons) -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // ------------------------------------
+        // Dark/Light Mode Toggle Functionality
+        // ------------------------------------
+        const body = document.getElementById('body');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Check for saved preference or system preference
+        const isDarkMode = localStorage.getItem('theme') === 'dark' || 
+                           (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        // Apply initial theme
+        if (isDarkMode) {
+            body.classList.add('dark');
+            body.classList.remove('light');
+            themeIcon.setAttribute('data-lucide', 'sun');
+            themeIcon.classList.remove('text-indigo-400');
+            themeIcon.classList.add('text-yellow-400');
+        } else {
+            body.classList.add('light');
+            body.classList.remove('dark');
+            themeIcon.setAttribute('data-lucide', 'moon');
+            themeIcon.classList.remove('text-yellow-400');
+            themeIcon.classList.add('text-indigo-400');
+        }
+        lucide.createIcons(); // Re-render icons after change
+
+        // Toggle handler
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                // Switch to light mode
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                themeIcon.setAttribute('data-lucide', 'moon');
+                themeIcon.classList.remove('text-yellow-400');
+                themeIcon.classList.add('text-indigo-400');
+            } else {
+                // Switch to dark mode
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.setAttribute('data-lucide', 'sun');
+                themeIcon.classList.remove('text-indigo-400');
+                themeIcon.classList.add('text-yellow-400');
+            }
+            lucide.createIcons(); // Re-render icons after change
+        });
+
+        // ------------------------------------
+        // Placeholder Functionality
+        // ------------------------------------
+        function downloadResume(resume) {
+            // Replace '#' with the actual URL to your PDF or document
+            console.log("PDF Document Name:", resume);
+            // For a real site, you would use:
+           //  window.open('https://your-domain.com/path/to/your/resume.pdf', '_blank');
+
+            // Using a simple modal notification instead of alert()
+            showNotification("Resume Download");
+        }
+
+        // Custom Modal Notification (replacing alert())
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-5 right-5 z-[9999] p-4 bg-primary text-white rounded-lg shadow-xl transition-opacity duration-300 opacity-0 transform translate-y-5';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('opacity-0', 'translate-y-5');
+                notification.classList.add('opacity-100', 'translate-y-0');
+            }, 10);
+
+            // Animate out and remove
+            setTimeout(() => {
+                notification.classList.remove('opacity-100', 'translate-y-0');
+                notification.classList.add('opacity-0', 'translate-y-5');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Smooth Scroll for mobile navigation (optional, as Tailwind link scroll is usually enough)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
